@@ -32,11 +32,15 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["expo-font", "expo-asset"],
+    "plugins": [
+      "expo-font",
+      "expo-asset"
+    ],
     "extra": {
       "eas": {
-        "projectId": ""
+        "projectId": "6d18ed21-2ceb-4e5e-bd8d-a13a8daeca60"
       }
-    }
+    },
+    "owner": "subathran"
   }
 }
