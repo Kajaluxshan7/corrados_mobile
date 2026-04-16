@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, StyleSheet, LogBox } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import * as SplashScreen from "expo-splash-screen";
+import { Asset } from "expo-asset";
 import {
   useFonts,
   PlayfairDisplay_400Regular,
@@ -20,10 +21,18 @@ import { colors } from "./src/theme";
 // Suppress common non-critical warnings
 LogBox.ignoreLogs(["Sending `onAnimatedValueUpdate`"]);
 
-// Keep splash visible while fonts load
+// Keep splash visible while fonts and assets load
 SplashScreen.preventAutoHideAsync();
 
+const PRELOAD_ASSETS = [
+  require("./src/assets/logo-white-on-blue.png"),
+  require("./src/assets/logo-blue.png"),
+  require("./src/assets/logo-white-on-black.png"),
+];
+
 export default function App() {
+  const [assetsReady, setAssetsReady] = useState(false);
+
   const [fontsLoaded, fontError] = useFonts({
     "PlayfairDisplay-Regular": PlayfairDisplay_400Regular,
     "PlayfairDisplay-Bold": PlayfairDisplay_700Bold,
@@ -32,13 +41,21 @@ export default function App() {
     "Lato-Bold": Lato_700Bold,
   });
 
+  useEffect(() => {
+    Asset.loadAsync(PRELOAD_ASSETS)
+      .catch(() => {
+        // Non-critical: proceed even if preload fails
+      })
+      .finally(() => setAssetsReady(true));
+  }, []);
+
   const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
+    if ((fontsLoaded || fontError) && assetsReady) {
       await SplashScreen.hideAsync();
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, fontError, assetsReady]);
 
-  if (!fontsLoaded && !fontError) {
+  if ((!fontsLoaded && !fontError) || !assetsReady) {
     return null;
   }
 

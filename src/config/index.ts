@@ -1,7 +1,7 @@
 // API Configuration
 // Change this to your backend URL when deploying
-const DEV_API_URL = "http://167.114.129.138:5000"; // Hosted backend
-const PROD_API_URL = "http://167.114.129.138:5000"; // Hosted backend
+const DEV_API_URL = "https://ordereast.ca"; // Hosted backend
+const PROD_API_URL = "https://ordereast.ca"; // Hosted backend
 
 // Use React Native's built-in __DEV__ global
 declare const __DEV__: boolean;

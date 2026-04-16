@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Corrado's",
+    "name": "Corrado's Restaurant & Bar",
     "slug": "corrados-restaurant",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,7 +18,8 @@
       "infoPlist": {
         "NSAppTransportSecurity": {
           "NSAllowsArbitraryLoads": true
-        }
+        },
+        "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
