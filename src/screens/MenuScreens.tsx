@@ -297,8 +297,7 @@ export function MenuItemsScreen({ route, navigation }: MenuItemsProps) {
         {item.imageUrls?.[0] ? (
           <DynamicImage
             uri={getImageUrl(item.imageUrls[0])}
-            containerWidth={80}
-            style={styles.menuItemImage}
+            style={[styles.menuItemImage, { width: 80, height: 80 }]}
             backgroundColor={colors.background.default}
           />
         ) : null}
